@@ -79,6 +79,57 @@ app.post("/livros", (req, res) => {
     });
 });
 
+app.delete("/livros/:id", (req, res) => {
+    const q = `DELETE FROM tbLivros WHERE IdLivro = ${req.params.id}`;
+    //Pega a conexão
+    db.getConnection((err, connection) => {
+        if(err) {
+            console.error("Erro ao obter conexão:", err);
+            return res.status(500).json({ error: "Erro de conexão com o banco de dados" });
+        }
+        connection.query(q, (err, resultado) => {
+            connection.release();
+            if(err) return res.json(err);
+            return res.json("O livro foi excluído com sucesso!");   
+        });
+    });
+});
+
+app.put("/livros/:id", (req, res) => {
+    const q = `UPDATE tbLivros SET Titulo = ?, Descricao = ?, Preco = ?, Cover = ? WHERE IdLivro = ${req.params.id}`;
+    const values = [
+        req.body.titulo,
+        req.body.descricao,
+        req.body.preco,
+        req.body.cover
+    ];
+    db.getConnection((err, connection) => {
+        if(err) {
+            console.error("Erro ao obter conexão:", err);
+            return res.status(500).json({ error: "Erro de conexão com o banco de dados" });
+        }
+        connection.query(q, values, req.body.id, (err, resultado) => {
+            connection.release();
+            if(err) return res.json(err);
+            return res.json("O livro foi atualizado com sucesso!");   
+        });
+    });
+});
+
+app.get("imagem/:id", (req, res) => {
+    const q = `SELECT Cover FROM tbLivros WHERE IdLivro = ${req.params.id}`;
+    db.getConnection((err, connection) => {
+        if(err) {
+            console.log("Erro ao obter a conexão:", err);
+            return res.status(500).json({ error: "Erro de conexão com o banco de dados" });
+        }
+        connection.query(q, (err, resultado) => {
+            connection.release();
+            return res.json(resultado);
+        })
+    })
+})
+
 app.listen(8800, () => {
     console.log("Conectado ao backend!");
 });

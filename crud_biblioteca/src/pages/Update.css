@@ -1,0 +1,41 @@
+.atualizar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #5F8B4C;
+    width: 350px;
+    height: 450px;
+    padding: 1rem;
+    border-radius: 8px;
+    gap: 5px;
+    color: white;
+}
+
+.formulario input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1.5px solid white;
+    color: white;
+    outline: none;
+}
+
+textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1.5px solid white;
+    color: white;
+    outline: none;
+}
+
+.formulario .btn-add {
+    margin-top: 1rem;
+}

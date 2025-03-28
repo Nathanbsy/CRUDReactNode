@@ -6,3 +6,123 @@
     box-sizing: border-box;
     font-family: 'Poppins';
 }
+
+body {
+    background-color: #ffe4a5;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    margin-left: 5rem;
+}
+
+.titulo img {
+    width: 100px;
+    height: 90px;
+    margin-right: 10px;
+}
+
+.livros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.livro {
+    width: 300px;
+    height: 400px;
+    background-color: #29a16b;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.livro-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.livro-botoes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.botao {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-add {
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn-update {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #1359b4;
+    border: 2px solid #1a73e8;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+}
+
+.btn-update:hover {
+    background-color: #1a73e8;
+    color: #fff;
+}
+
+.btn-delete {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #b93a3a;
+    border: 2px solid #b93a3a;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.btn-delete:hover {
+    background-color: #b93a3a;
+    color: #fff;
+}
+
+
+.btn-add:hover {
+    background-color: #0f5aeb;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.btn-add a {
+    text-decoration: none;
+    color: #fff;
+}
