@@ -1,5 +1,6 @@
 import express from "express";
 import mysql from "mysql";
+import cors from "cors";
 
 const app = express();
 
@@ -10,6 +11,9 @@ const db = mysql.createPool({
     database: "dbBiblioteca",
     insecureAuth: true
 });
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
     res.json("Olá, mundo!");
@@ -53,9 +57,14 @@ app.get("/livros/:id", (req, res) => {
     });
 });
 
-app.post("/books", (req, res) => {
-    const q = `INSERT INTO tbLivros (Titulo, Descricao, Cover) VALUES (?)`;
-    const values = ["title from backend", "description from backend", "cover pic from backend"];
+app.post("/livros", (req, res) => {
+    const q = `INSERT INTO tbLivros (Titulo, Descricao, Preco, Cover) VALUES (?)`;
+    const values = [
+        req.body.titulo,
+        req.body.descricao,
+        req.body.preco,
+        req.body.cover
+    ];
     //Pega a conexão
     db.getConnection((err, connection) => {
         if(err) {
