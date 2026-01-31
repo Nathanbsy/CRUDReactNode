@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import { resolveCoverSrc } from "../utils/cover";
+import "./Detalhes.css";
 
 function Detalhes() {
   const [livro, setLivro] = useState([]);
@@ -22,13 +24,27 @@ function Detalhes() {
   return (
     <div>
       <h1>Detalhes</h1>
-      {livro.map((livro) => (
-        <div key={livro.IdLivro}>
-          <h2>{livro.Titulo}</h2>
-          <p>{livro.Descricao}</p>
-          <span>R${livro.Preco}</span>
-        </div>
-      ))}
+      {livro.map((livro) => {
+        const coverSrc = resolveCoverSrc(livro.Cover);
+        return (
+          <div key={livro.IdLivro}>
+            <h2>{livro.Titulo}</h2>
+            {coverSrc ? (
+              <img
+                className="detalhes-capa"
+                src={coverSrc}
+                alt={`Capa de ${livro.Titulo}`}
+              />
+            ) : (
+              <div className="detalhes-capa detalhes-capa--vazia">
+                Capa indisponível
+              </div>
+            )}
+            <p>{livro.Descricao}</p>
+            <span>R${livro.Preco}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }

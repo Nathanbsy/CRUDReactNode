@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Livros.css";
-import imagemRammusJoinha from "../assets/rammusJoinha.png";
+import imagemRammusJoinha from "../assets/rammusjoinha.png";
+import { resolveCoverSrc } from "../utils/cover";
 
 function Livros() {
   const [livros, setLivros] = useState([]);
@@ -54,44 +55,53 @@ function Livros() {
         </div>
 
         <div className="livros">
-          {livros.map((livro) => (
-            <div key={livro.IdLivro} className="livro" onClick={() => {
-              detalhesLivro(livro.IdLivro);
-            }}>
+          {livros.map((livro) => {
+            const coverSrc = resolveCoverSrc(livro.Cover);
+            return (
               <div
-                className="livro-info"
-                
+                key={livro.IdLivro}
+                className="livro"
+                onClick={() => {
+                  detalhesLivro(livro.IdLivro);
+                }}
               >
-                <div id="imgLivro">
-                  
-                  <img src={livro.Cover} alt="" />
+                <div className="livro-info">
+                  <div id="imgLivro">
+                    {coverSrc ? (
+                      <img src={coverSrc} alt={`Capa de ${livro.Titulo}`} />
+                    ) : (
+                      <div className="livro-capa livro-capa--vazia">
+                        Capa indisponível
+                      </div>
+                    )}
+                  </div>
+                  <h2>{livro.Titulo}</h2>
+                  <p>{livro.Descricao}</p>
+                  <span>R${livro.Preco}</span>
                 </div>
-                <h2>{livro.Titulo}</h2>
-                <p>{livro.Descricao}</p>
-                <span>R${livro.Preco}</span>
+                <div className="livro-botoes">
+                  <button
+                    className="btn-delete"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onDelete(livro.IdLivro);
+                    }}
+                  >
+                    Excluir
+                  </button>
+                  <button
+                    className="btn-update"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onUpdate(livro.IdLivro);
+                    }}
+                  >
+                    Atualizar
+                  </button>
+                </div>
               </div>
-              <div className="livro-botoes">
-                <button
-                  className="btn-delete"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    onDelete(livro.IdLivro);
-                  }}
-                >
-                  Excluir
-                </button>
-                <button
-                  className="btn-update"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    onUpdate(livro.IdLivro);
-                  }}
-                >
-                  Atualizar
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="botao">
           <button className="btn-add">
