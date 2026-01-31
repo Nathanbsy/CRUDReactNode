@@ -1,0 +1,18 @@
+.detalhes-capa {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 12px 0;
+  display: block;
+  background-color: #f0f0f0;
+}
+
+.detalhes-capa--vazia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
